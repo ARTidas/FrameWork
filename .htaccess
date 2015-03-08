@@ -1,0 +1,10 @@
+Options -Indexes
+AddDefaultCharset UTF-8
+	<IfModule mod_rewrite.c>
+		RewriteEngine on
+
+		RewriteCond %{REQUEST_FILENAME} !index\.php
+		RewriteCond %{REQUEST_FILENAME} !-f
+		RewriteCond %{REQUEST_FILENAME} !-d
+		RewriteRule ^(.*)(/.html)?$   index.php?request=$1 [QSA,L]
+	</IfModule>
