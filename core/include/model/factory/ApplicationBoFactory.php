@@ -26,16 +26,16 @@ class ApplicationBoFactory
 	 */
 	public function get($applicationName)
 	{
-		switch ($applicationName)
+		switch (strtolower($applicationName))
 		{
-			case self::APPLICATION_CORE:
+			case strtolower(self::APPLICATION_CORE):
 				return new CoreApplicationBo(
 					self::APPLICATION_CORE,
 					'/' . ConfigDo::$coreIncludeFolder
 				);
 				break;
 
-			case self::APPLICATION_SITE:
+			case strtolower(self::APPLICATION_SITE):
 				return new SiteApplicationBo(
 					self::APPLICATION_CORE,
 					'/' . ConfigDo::$coreApplicationFolder . self::APPLICATION_SITE . '/'

@@ -4,24 +4,18 @@
  */
 
 $routes = array(
-	'/' => 'IndexController/getDocumentation',
+	'/' => 'IndexController/displayDocumentation',
 );
-$routingBo = new \Core\RoutingBo($routes);
-var_dump($routingBo->getActionToCall());
-
-$request         = empty($_REQUEST['request']) ? '/' : $_REQUEST['request'];
-$requestFolders  = explode('/', $request);
-$applicationName = empty($requestFolders[0]) ? \Core\ApplicationBoFactory::APPLICATION_CORE : $requestFolders[0];
-array_shift($requestFolders);
-$route           = implode('/', $requestFolders);
-
-
 
 $applicationBoFactory = new \Core\ApplicationBoFactory();
-$applicationBo        = $applicationBoFactory->get($applicationName);
+$routingBo            = new \Core\RoutingBo($routes);
+$routingDo            = $routingBo->getRoutingDo();
 
+$application = $routingDo->getApplication();
+$class       = $routingDo->getClass();
+$method      = $routingDo->getMethod();
 
-$controller = $applicationBo;
-
-var_dump($applicationBo);
+$class  = $application . '\\'  . $class;
+$object = new $class();
+$object->$method();
 

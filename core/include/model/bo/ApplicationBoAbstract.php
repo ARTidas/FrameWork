@@ -37,6 +37,16 @@ abstract class ApplicationBoAbstract
 	}
 
 	/**
+	 * Get application Name.
+	 *
+	 * @return string   Application name.
+	 */
+	public function getApplicationName()
+	{
+		return $this->applicationName;
+	}
+
+	/**
 	 * Get application folder.
 	 *
 	 * @return string   Application folder.
