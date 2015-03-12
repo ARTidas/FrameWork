@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace Common;
 
 /**
  * Routing business object.
@@ -96,7 +96,7 @@ class RoutingBo
 	protected function loadApplicationToCall()
 	{
 		$requestFolders  = explode('/', $this->request);
-		$applicationName = empty($requestFolders[0]) ? ApplicationBoFactory::APPLICATION_CORE : $requestFolders[0];
+		$applicationName = empty($requestFolders[0]) ? ApplicationBoFactory::APPLICATION_COMMON : $requestFolders[0];
 
 		$this->routingDo->setApplication($applicationName);
 	}

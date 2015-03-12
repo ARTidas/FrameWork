@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace Common;
 
 /**
  * Application business object abstract.

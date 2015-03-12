@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace Common;
 
 /**
  * Core application business object.
@@ -8,6 +8,6 @@ namespace Core;
  * @package    Core
  * @subpackage Bo
  */
-class CoreApplicationBo extends ApplicationBoAbstract
+class ApplicationBo extends ApplicationBoAbstract
 {
 }
