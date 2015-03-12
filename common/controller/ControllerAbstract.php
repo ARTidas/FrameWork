@@ -17,8 +17,13 @@ abstract class ControllerAbstract
 	 */
 	public function displayDocumentation()
 	{
-		$view = new LayoutView();
+		$view     = new LayoutView();
+		$layoutDo = new LayoutDo();
+		$layoutDo
+			->setCss()
+			->setTitle()
+		;
 
-		echo $view->display();
+		echo $view->display($layoutDo);
 	}
 }
