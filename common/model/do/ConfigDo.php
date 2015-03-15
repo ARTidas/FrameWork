@@ -28,4 +28,6 @@ class ConfigDo
 	public static $classFolderFactory;
 	/** @var string   View class folder. */
 	public static $classFolderView;
+	/** @var string   Public CSS folder. */
+	public static $publicCssFolder;
 }

@@ -11,9 +11,36 @@ namespace Common;
 abstract class ViewAbstract
 {
 	/**
-	 * Display content.
+	 * Template content.
 	 *
-	 * @return string   Content to display.
+	 * @var string
 	 */
-	abstract public function display();
+	protected $content;
+
+	/**
+	 * Construct.
+	 *
+	 * @param LayoutDo $layoutDo   Layout data object.
+	 */
+	abstract public function __construct(LayoutDo $layoutDo);
+
+	/**
+	 * Get template content.
+	 *
+	 * @return string   Template content.
+	 */
+	public function getContent()
+	{
+		return $this->content;
+	}
+
+	/**
+	 * Display template.
+	 *
+	 * @return void
+	 */
+	public function display()
+	{
+		echo $this->content;
+	}
 }

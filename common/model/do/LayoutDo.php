@@ -25,6 +25,13 @@ class LayoutDo
 	protected $css;
 
 	/**
+	 * H1 html tag content.
+	 *
+	 * @var string
+	 */
+	protected $header1;
+
+	/**
 	 * Get title.
 	 *
 	 * @return string   Title for display.
@@ -43,7 +50,7 @@ class LayoutDo
 	 */
 	public function setTitle($title)
 	{
-		$this->title = $title;
+		$this->title = (string)$title;
 
 		return $this;
 	}
@@ -67,7 +74,31 @@ class LayoutDo
 	 */
 	public function setCss($css)
 	{
-		$this->css = $css;
+		$this->css = (string)$css;
+
+		return $this;
+	}
+
+	/**
+	 * Get H1 html tag content.
+	 *
+	 * @return string   H1 html content.
+	 */
+	public function getHeader1()
+	{
+		return $this->header1;
+	}
+
+	/**
+	 * Set H1 html tag content.
+	 *
+	 * @param string $header1   H1 html content.
+	 *
+	 * @return $this
+	 */
+	public function setHeader1($header1)
+	{
+		$this->header1 = (string)$header1;
 
 		return $this;
 	}
