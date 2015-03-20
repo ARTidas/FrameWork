@@ -12,4 +12,12 @@ use Common\RoutingDoAbstract;
  */
 class RoutingDo extends RoutingDoAbstract
 {
+	/**
+	 * The application routing.
+	 *
+	 * @var array
+	 */
+	protected $routing = array(
+		'create' => 'UserController/create'
+	);
 }

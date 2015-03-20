@@ -35,6 +35,8 @@ class ConfigDo
 	public static $classFolderFactory;
 	/** @var string   View class folder. */
 	public static $classFolderView;
+	/** @var string   Dao class folder. */
+	public static $classFolderDao;
 	/** @var string   Public CSS folder. */
 	public static $publicCssFolder;
 }

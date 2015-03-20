@@ -113,6 +113,10 @@ class ClassBo
 				return ConfigDo::$classFolderDo;
 				break;
 
+			case self::TYPE_DAO:
+				return ConfigDo::$classFolderDao;
+				break;
+
 			case self::TYPE_FACTORY:
 				return ConfigDo::$classFolderFactory;
 				break;

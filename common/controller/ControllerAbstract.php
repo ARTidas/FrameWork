@@ -11,6 +11,19 @@ namespace Common;
 abstract class ControllerAbstract
 {
 	/**
+	 * Invoke.
+	 *
+	 * @param string $methodName         Method name to call.
+	 * @param array  $methodParameters   Method parameters for calling.
+	 *
+	 * @return void
+	 */
+	public function __invoke($methodName, array $methodParameters = array())
+	{
+		call_user_func_array([$this, $methodName], $methodParameters);
+	}
+
+	/**
 	 * Display documentation.
 	 *
 	 * @return string
