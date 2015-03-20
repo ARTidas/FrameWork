@@ -1,11 +1,13 @@
 <?php
 
-namespace Common;
+namespace Site;
+
+use Common\RoutingDoAbstract;
 
 /**
  * Routing data object.
  *
- * @package    Common
+ * @package    Site
  * @subpackage Do
  */
 class RoutingDo extends RoutingDoAbstract

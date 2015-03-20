@@ -7,8 +7,8 @@ body {
     text-align: center;
     font-family: 'Open Sans', sans-serif;
     margin: 0;
-    padding: 5px;
-    font-size: 12px;
+    padding: 3px;
+    font-size: 14px;
 }
 
 #cMain {
@@ -16,25 +16,27 @@ body {
     margin: auto;
     width: auto;
     text-align: left;
+    padding: 3px;
 
     border: 1px solid #ccc;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -khtml-border-radius: 5px;
-    border-radius: 5px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
 }
 
 h1, h2, h3, h4 {
-    color: #ccc;
-    margin: 5px;
+    color: #999;
+    margin: 3px;
     text-shadow: 0 1px 0 #fff;
 }
 
 a {
-    color: #ccc;
+    color: #999;
+    text-decoration: none;
 }
 a:hover {
-    color: #ddd;
+    color: #ccc;
 }
 
 hr {
@@ -53,14 +55,31 @@ td {
 
 img {
     border: none;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -khtml-border-radius: 5px;
-    border-radius: 5px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
 }
 
-ul {
+ul, ol {
     list-style-type: none;
-    padding-left: 10px;
+    padding-left: 20px;
     margin-top: 0;
+}
+ol {
+    list-style-type: decimal;
+}
+
+.code {
+    font-family: 'Source Code Pro', Monaco, Consolas, "Lucida Console", monospace;
+    font-size: 10px;
+    white-space: pre;
+    background-color: #eeeeee;
+    margin-left: 3px;
+    padding: 3px;
+    border: 1px dashed #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
 }

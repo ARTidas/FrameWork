@@ -3,9 +3,9 @@
 namespace Common;
 
 /**
- * Core application business object.
+ * Common application business object.
  *
- * @package    Core
+ * @package    Common
  * @subpackage Bo
  */
 class ApplicationBo extends ApplicationBoAbstract

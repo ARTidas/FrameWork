@@ -3,19 +3,32 @@
 namespace Common;
 
 use \Site\ApplicationBo as SiteApplicationBo;
+use \User\ApplicationBo as UserApplicationBo;
 
 /**
  * Application business object factory.
  *
- * @package    Core
+ * @package    Common
  * @subpackage Factory
  */
 class ApplicationBoFactory
 {
-	/** Application: Core. */
-	const APPLICATION_COMMON = 'Common';
-	/** Application: Site. */
-	const APPLICATION_SITE   = 'Site';
+	/**
+	 * Routing data object.
+	 *
+	 * @var RoutingDoAbstract
+	 */
+	protected $routingDo;
+
+	/**
+	 * Construct.
+	 *
+	 * @param RoutingDoAbstract $routingDo   Routing data object.
+	 */
+	public function __construct(RoutingDoAbstract $routingDo)
+	{
+		$this->routingDo = $routingDo;
+	}
 
 	/**
 	 * Get application business object by name.
@@ -30,17 +43,21 @@ class ApplicationBoFactory
 	{
 		switch (strtolower($applicationName))
 		{
-			case strtolower(self::APPLICATION_COMMON):
+			case strtolower(ConfigDo::APPLICATION_COMMON):
 				return new ApplicationBo(
-					self::APPLICATION_COMMON,
-					'/' . ConfigDo::$coreIncludeFolder
+					$this->routingDo
 				);
 				break;
 
-			case strtolower(self::APPLICATION_SITE):
+			case strtolower(ConfigDo::APPLICATION_SITE):
 				return new SiteApplicationBo(
-					self::APPLICATION_SITE,
-					'/' . ConfigDo::$coreApplicationFolder . '/' . strtolower(self::APPLICATION_SITE)
+					$this->routingDo
+				);
+				break;
+
+			case strtolower(ConfigDo::APPLICATION_USER):
+				return new UserApplicationBo(
+					$this->routingDo
 				);
 				break;
 

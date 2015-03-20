@@ -5,17 +5,24 @@ namespace Common;
 /**
  * Configuration data object.
  *
- * @package    Core
+ * @package    Common
  * @subpackage Do
  */
 class ConfigDo
 {
+	/** Application: Common. */
+	const APPLICATION_COMMON = 'Common';
+	/** Application: Site. */
+	const APPLICATION_SITE   = 'Site';
+	/** Application: User. */
+	const APPLICATION_USER   = 'User';
+
 	/** @var string   Request url root. */
 	public static $root;
-	/** @var string   Core common folder. */
-	public static $coreIncludeFolder;
-	/** @var string   Core application folder. */
-	public static $coreApplicationFolder;
+	/** @var string   Root common folder. */
+	public static $commonFolder;
+	/** @var string   Application folder. */
+	public static $applicationFolder;
 	/** @var string   Controller class folder. */
 	public static $classFolderController;
 	/** @var string   Bo class folder. */

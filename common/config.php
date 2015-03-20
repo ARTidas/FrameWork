@@ -3,8 +3,10 @@
  * Config.
  */
 
-Common\ConfigDo::$coreIncludeFolder     = 'common';
-Common\ConfigDo::$coreApplicationFolder = 'application';
+include_once('model/do/ConfigDo.php');
+
+Common\ConfigDo::$commonFolder          = 'common';
+Common\ConfigDo::$applicationFolder     = 'application';
 Common\ConfigDo::$classFolderBo         = 'model/bo';
 Common\ConfigDo::$classFolderFactory    = 'model/factory';
 Common\ConfigDo::$classFolderDo         = 'model/do';

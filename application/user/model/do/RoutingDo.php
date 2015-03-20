@@ -1,11 +1,13 @@
 <?php
 
-namespace Common;
+namespace User;
+
+use Common\RoutingDoAbstract;
 
 /**
  * Routing data object.
  *
- * @package    Common
+ * @package    User
  * @subpackage Do
  */
 class RoutingDo extends RoutingDoAbstract

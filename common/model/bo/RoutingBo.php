@@ -5,100 +5,86 @@ namespace Common;
 /**
  * Routing business object.
  *
- * @package    Core
+ * @package    Common
  * @subpackage Bo
  */
 class RoutingBo
 {
 	/**
-	 * Request routes.
+	 * Routing data object factory.
 	 *
-	 * @var array
+	 * @var RoutingDoFactory
 	 */
-	protected $routes;
+	protected $routingDoFactory;
 
 	/**
-	 * Request.
+	 * Request data object.
 	 *
-	 * @var string
+	 * @var RequestDo
 	 */
-	protected $request;
-
-	/**
-	 * Route to serve the request.
-	 *
-	 * @var string
-	 */
-	protected $route;
+	protected $requestDo;
 
 	/**
 	 * Routing data object.
 	 *
-	 * @var RoutingDo
+	 * @var RoutingDoAbstract
 	 */
 	protected $routingDo;
 
 	/**
 	 * Construct.
 	 *
-	 * @param array $routes   Request routes.
+	 * @param RoutingDoFactory $routingDoFactory   Routing data object factory.
+	 * @param RequestDo        $requestDo          Request data object.
 	 */
-	public function __construct(array $routes)
+	public function __construct(RoutingDoFactory $routingDoFactory, RequestDo $requestDo)
 	{
-		$this->routes    = $routes;
-		$this->request   = empty($_REQUEST['request']) ? '/' : $_REQUEST['request'];
-		$this->routingDo = new RoutingDo();
+		$this->routingDoFactory = $routingDoFactory;
+		$this->requestDo        = $requestDo;
+		$this->routingDo        = $this->routingDoFactory->get($this->requestDo->getApplicationName());
+
+		$this->loadRoutingDoAttributes();
 	}
 
 	/**
-	 * Get routing data object.
+	 * Load routing data object attributes.
 	 *
-	 * @return RoutingDo   Routing data object.
+	 * @throws \Exception   If no routing set for request.
+	 *
+	 * @return void
 	 */
-	public function getRoutingDo()
+	protected function loadRoutingDoAttributes()
 	{
-		$this->loadRoute();
-
-		return $this->routingDo;
-	}
-
-	/**
-	 * Load route for request.
-	 *
-	 * @throws \Exception   If route does not set for request.
-	 *
-	 * return void
-	 */
-	protected function loadRoute()
-	{
-		$requestFolders = explode('/', $this->request);
-		array_shift($requestFolders);
-		$route          = implode('/', $requestFolders);
-		$route          = $route === '' ? '/' : $route;
-
-		if (!isset($this->routes[$route]))
+		if (!isset($this->routingDo->getRouting()[$this->requestDo->getRoute()]))
 		{
-			throw new \Exception('Route does not exits: "' . $route . '"');
+			throw new \Exception('Could not find routing for request: "' . $this->requestDo->getRoute() . '"');
 		}
 
-		$this->route = $this->routes[$route];
 
+		$this->loadRouteFromRequest();
 		$this->loadApplicationToCall();
 		$this->loadClassToCall();
 		$this->loadMethodToCall();
 	}
 
 	/**
-	 * Load application to call on request.
+	 * Load route which serves request.
+	 *
+	 * @return void
+	 */
+	protected function loadRouteFromRequest()
+	{
+		$this->routingDo->setRoute($this->routingDo->getRouting()[$this->requestDo->getRoute()]);
+	}
+
+	/**
+	 * Load application to call.
 	 *
 	 * @return void
 	 */
 	protected function loadApplicationToCall()
 	{
-		$requestFolders  = explode('/', $this->request);
-		$applicationName = empty($requestFolders[0]) ? ApplicationBoFactory::APPLICATION_COMMON : $requestFolders[0];
-
-		$this->routingDo->setApplication($applicationName);
+		$this->routingDo->setApplicationName($this->requestDo->getApplicationName());
 	}
 
 	/**
@@ -108,7 +94,7 @@ class RoutingBo
 	 */
 	protected function loadClassToCall()
 	{
-		$this->routingDo->setClass(explode('/', $this->route)[0]);
+		$this->routingDo->setClassName(explode('/', $this->routingDo->getRoute())[0]);
 	}
 
 	/**
@@ -118,6 +104,16 @@ class RoutingBo
 	 */
 	protected function loadMethodToCall()
 	{
-		$this->routingDo->setMethod(explode('/', $this->route)[1]);
+		$this->routingDo->setMethodName(explode('/', $this->routingDo->getRoute())[1]);
+	}
+
+	/**
+	 * Get routing data object abstract.
+	 *
+	 * @return RoutingDoAbstract   Routing data object abstract.
+	 */
+	public function getRoutingDo()
+	{
+		return $this->routingDo;
 	}
 }

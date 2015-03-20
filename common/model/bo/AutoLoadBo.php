@@ -5,7 +5,7 @@ namespace Common;
 /**
  * Class automatic loader business object.
  *
- * @package    Core
+ * @package    Common
  * @subpackage Bo
  */
 class AutoLoadBo
@@ -18,22 +18,22 @@ class AutoLoadBo
 	protected $classBo;
 
 	/**
-	 * Application business object factory.
+	 * Application folder business object.
 	 *
-	 * @var ApplicationBoFactory
+	 * @var ApplicationFolderBo
 	 */
-	protected $applicationBoFactory;
+	protected $applicationFolderBo;
 
 	/**
 	 * Construct.
 	 *
-	 * @param ClassBo              $classBo                Class business object.
-	 * @param ApplicationBoFactory $applicationBoFactory   Application business object.
+	 * @param ClassBo             $classBo               Class business object.
+	 * @param ApplicationFolderBo $applicationFolderBo   Application folder business object.
 	 */
-	public function __construct(ClassBo $classBo, ApplicationBoFactory $applicationBoFactory)
+	public function __construct(ClassBo $classBo, ApplicationFolderBo $applicationFolderBo)
 	{
-		$this->classBo              = $classBo;
-		$this->applicationBoFactory = $applicationBoFactory;
+		$this->classBo             = $classBo;
+		$this->applicationFolderBo = $applicationFolderBo;
 	}
 
 	/**
@@ -51,12 +51,11 @@ class AutoLoadBo
 		$classNamespace  = $classAttributes[0];
 		$className       = $classAttributes[1];
 		$classType       = $this->classBo->getType($className);
-		$applicationBo   = $this->applicationBoFactory->get($classNamespace);
-		$classRoute      = $applicationBo->getApplicationFolder()
+		$classRoute      = $this->applicationFolderBo->get($classNamespace)
 			. '/'
 			. $this->classBo->getClassRoutePartByType($classType)
 			. '/'
-			. strtolower($className)
+			. $className
 			. '.php'
 		;
 

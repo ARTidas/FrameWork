@@ -3,9 +3,9 @@
 namespace Common;
 
 /**
- * Core actions.
+ * Common actions.
  *
- * @package    Core
+ * @package    Common
  * @subpackage Controller
  */
 class IndexController extends ControllerAbstract

@@ -5,7 +5,7 @@ namespace Common;
 /**
  * Class business object.
  *
- * @package    Core
+ * @package    Common
  * @subpackage Bo
  */
 class ClassBo
@@ -68,7 +68,9 @@ class ClassBo
 
 		if (!$this->isTypeValid($classType))
 		{
-			throw new \Exception('Invalid class type encountered: "' . $classType . '"');
+			throw new \Exception(
+				'Invalid class type encountered: "' . $classType . '" from input parameter: "' . $className . '"'
+			);
 		}
 
 		return $classType;

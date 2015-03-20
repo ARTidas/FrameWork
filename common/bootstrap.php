@@ -10,9 +10,8 @@
  */
 function __autoload($className)
 {
-	$classBo              = new \Common\ClassBo();
-	$applicationBoFactory = new \Common\ApplicationBoFactory();
-	$autoLoadBo           = new \Common\AutoLoadBo($classBo, $applicationBoFactory);
-
+	$classBo             = new \Common\ClassBo();
+	$applicationFolderBo = new \Common\ApplicationFolderBo();
+	$autoLoadBo          = new \Common\AutoLoadBo($classBo, $applicationFolderBo);
 	$autoLoadBo->load($className);
 }

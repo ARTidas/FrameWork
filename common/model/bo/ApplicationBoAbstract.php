@@ -5,54 +5,39 @@ namespace Common;
 /**
  * Application business object abstract.
  *
- * @package    Core
+ * @package    Common
  * @subpackage Bo
  */
 abstract class ApplicationBoAbstract
 {
 	/**
-	 * Application name.
+	 * Application routing data object.
 	 *
-	 * @var string
+	 * @var RoutingDoAbstract
 	 */
-	protected $applicationName;
-
-	/**
-	 * Application folder.
-	 *
-	 * @var string
-	 */
-	protected $applicationFolder;
+	protected $routingDo;
 
 	/**
 	 * Construct.
 	 *
-	 * @param string $applicationName     Application name.
-	 * @param string $applicationFolder   Application folder.
+	 * @param RoutingDoAbstract  $routingDo   Application routing data object abstract.
 	 */
-	public function __construct($applicationName, $applicationFolder)
+	public function __construct(RoutingDoAbstract $routingDo)
 	{
-		$this->applicationName   = $applicationName;
-		$this->applicationFolder = $applicationFolder;
+		$this->routingDo = $routingDo;
 	}
 
 	/**
-	 * Get application Name.
+	 * Serve request with application.
 	 *
-	 * @return string   Application name.
+	 * @return void
 	 */
-	public function getApplicationName()
+	public function serveRequest()
 	{
-		return $this->applicationName;
-	}
+		$className  = $this->routingDo->getApplicationName() . '\\'  . $this->routingDo->getClassName();
+		$methodName = $this->routingDo->getMethodName();
 
-	/**
-	 * Get application folder.
-	 *
-	 * @return string   Application folder.
-	 */
-	public function getApplicationFolder()
-	{
-		return $this->applicationFolder;
+		$object = new $className();
+		$object->$methodName();
 	}
 }
