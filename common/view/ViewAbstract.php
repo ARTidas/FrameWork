@@ -18,11 +18,22 @@ abstract class ViewAbstract
 	protected $content;
 
 	/**
+	 * View data object.
+	 *
+	 * @var string
+	 */
+	protected $viewDo;
+
+	/**
 	 * Construct.
 	 *
-	 * @param LayoutDo $layoutDo   Layout data object.
+	 * @param ViewDoAbstract $viewDo   View data object.
 	 */
-	abstract public function __construct(LayoutDo $layoutDo);
+	public function __construct(ViewDoAbstract $viewDo)
+	{
+		$this->viewDo = $viewDo;
+		$this->loadContent();
+	}
 
 	/**
 	 * Get template content.
@@ -43,4 +54,11 @@ abstract class ViewAbstract
 	{
 		echo $this->content;
 	}
+
+	/**
+	 * Load content.
+	 *
+	 * @return void.
+	 */
+	abstract protected function loadContent();
 }

@@ -8,7 +8,7 @@ namespace Common;
  * @package    Common
  * @subpackage Do
  */
-class LayoutDo
+class LayoutViewDo extends ViewDoAbstract
 {
 	/**
 	 * Title to display.

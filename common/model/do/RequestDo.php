@@ -50,7 +50,7 @@ class RequestDo
 	 */
 	public function setRequest($request)
 	{
-		$this->request = $request;
+		$this->request = (string)$request;
 
 		return $this;
 	}
@@ -74,7 +74,7 @@ class RequestDo
 	 */
 	public function setApplicationName($applicationName)
 	{
-		$this->applicationName = $applicationName;
+		$this->applicationName = (string)$applicationName;
 
 		return $this;
 	}
@@ -98,7 +98,7 @@ class RequestDo
 	 */
 	public function setRoute($route)
 	{
-		$this->route = $route;
+		$this->route = (string)$route;
 
 		return $this;
 	}

@@ -30,7 +30,7 @@ abstract class ControllerAbstract
 	 */
 	public function displayDocumentation()
 	{
-		$layoutDo = new LayoutDo();
+		$layoutDo = new LayoutViewDo();
 		$layoutDo
 			->setCss('common.css')
 			->setTitle('FrameWork')

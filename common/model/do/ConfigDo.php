@@ -17,6 +17,11 @@ class ConfigDo
 	/** Application: User. */
 	const APPLICATION_USER   = 'User';
 
+	/** Database type: mysql. */
+	const DATABASE_TYPE_MYSQL   = 'mysql';
+	/** Database type: mongodb. */
+	const DATABASE_TYPE_MONGODB = 'mongodb';
+
 	/** @var string   Request url root. */
 	public static $root;
 	/** @var string   Root common folder. */
@@ -39,4 +44,25 @@ class ConfigDo
 	public static $classFolderDao;
 	/** @var string   Public CSS folder. */
 	public static $publicCssFolder;
+	/** @var array  Database connection attributes. */
+	public static $databases = array();
+
+	/**
+	 * Get database data object.
+	 *
+	 * @throws \Exception   If could not find database configuration.
+	 *
+	 * @param string $databaseName
+	 *
+	 * @return DatabaseDo   Database data object.
+	 */
+	public static function getDatabaseDo($databaseName)
+	{
+		if (!isset(self::$databases[$databaseName]))
+		{
+			throw new \Exception('Could not find connection configuration for database: "' . $databaseName . '"');
+		}
+
+		return self::$databases[$databaseName];
+	}
 }

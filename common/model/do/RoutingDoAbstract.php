@@ -114,7 +114,7 @@ class RoutingDoAbstract
 	 */
 	public function setApplicationName($applicationName)
 	{
-		$this->applicationName = $applicationName;
+		$this->applicationName = (string)$applicationName;
 
 		return $this;
 	}
@@ -138,7 +138,7 @@ class RoutingDoAbstract
 	 */
 	public function setRoute($route)
 	{
-		$this->route = $route;
+		$this->route = (string)$route;
 
 		return $this;
 	}

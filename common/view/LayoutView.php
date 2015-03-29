@@ -11,22 +11,22 @@ namespace Common;
 class LayoutView extends ViewAbstract
 {
 	/**
-	 * Construct.
+	 * Load content.
 	 *
-	 * @param LayoutDo $layoutDo   Layout data object.
+	 * @return void
 	 */
-	public function __construct(LayoutDo $layoutDo)
+	protected function loadContent()
 	{
 		$this->content = '<!DOCTYPE html>
 <html>
 	<head>
-		<title>' . $layoutDo->getTitle() . '</title>
-		<link rel="stylesheet" href="' . ConfigDo::$publicCssFolder . '/' . $layoutDo->getCss() . '" \>
+		<title>' . $this->viewDo->getTitle() . '</title>
+		<link rel="stylesheet" href="' . ConfigDo::$publicCssFolder . '/' . $this->viewDo->getCss() . '" \>
 	</head>
 	<body>
 		<div id="cMain">
 
-			<h1>' . $layoutDo->getHeader1() . '</h1>
+			<h1>' . $this->viewDo->getHeader1() . '</h1>
 			<ul>
 				<li><a href="#create-new-application">Create new application</a></li>
 			</ul>

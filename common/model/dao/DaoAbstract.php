@@ -13,17 +13,18 @@ class DaoAbstract
 	/**
 	 * Database connection business object.
 	 *
-	 * @var DataBaseConnectionBo
+	 * @var DatabaseConnectionBo
 	 */
-	protected $dataBaseConnectionBo;
+	protected $databaseConnectionBo;
 
 	/**
-	 * Get database connection.
-	 *
-	 * @param DataBaseConnectionBo $dataBaseConnectionBo   Database connection business object.
+	 * Construct.
 	 */
-	protected function __construct($dataBaseConnectionBo)
+	public function __construct()
 	{
-		$this->dataBaseConnectionBo = $dataBaseConnectionBo;
+		$databaseHandlerBoFactory = new DatabaseHandlerBoFactory();
+		$databaseConnectionBo     = new DatabaseConnectionBo($databaseHandlerBoFactory);
+
+		$this->databaseConnectionBo = $databaseConnectionBo;
 	}
 }

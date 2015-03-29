@@ -8,15 +8,36 @@ namespace Common;
  * @package    Common
  * @subpackage Bo
  */
-class DataBaseConnectionBo
+class DatabaseConnectionBo
 {
 	/**
-	 * @param string $connectionName   Connection name.
+	 * Database handler business object factory.
 	 *
-	 * @return
+	 * @var DatabaseHandlerBoFactory
 	 */
-	public function connect($connectionName)
-	{
+	protected $databaseHandlerBoFactory;
 
+	/**
+	 * Construct.
+	 *
+	 * @param DatabaseHandlerBoFactory $databaseHandlerBoFactory   Database handler business object factory.
+	 */
+	public function __construct(DatabaseHandlerBoFactory $databaseHandlerBoFactory)
+	{
+		$this->databaseHandlerBoFactory = $databaseHandlerBoFactory;
+	}
+
+	/**
+	 * Get database handler by database name.
+	 *
+	 * @param string $databaseName   Database name.
+	 *
+	 * @return DatabaseHandlerBoAbstract
+	 */
+	public function getHandler($databaseName)
+	{
+		$databaseDo = ConfigDo::getDatabaseDo($databaseName);
+
+		return $this->databaseHandlerBoFactory->get($databaseDo);
 	}
 }

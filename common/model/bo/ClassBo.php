@@ -81,7 +81,7 @@ class ClassBo
 	 *
 	 * @param string $classType   Class type to check.
 	 *
-	 * @return bool   True if valid, false otherwise.
+	 * @return boolean   True if valid, false otherwise.
 	 */
 	protected function isTypeValid($classType)
 	{

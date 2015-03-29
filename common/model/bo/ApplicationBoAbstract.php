@@ -37,8 +37,25 @@ abstract class ApplicationBoAbstract
 		$className  = $this->routingDo->getApplicationName() . '\\'  . $this->routingDo->getClassName();
 		$methodName = $this->routingDo->getMethodName();
 
+		$object = new $className();
+		$object($methodName, $this->getMethodParameters($className, $methodName));
+	}
+
+	/**
+	 * Get method parameters.
+	 *
+	 * @param string $className    Class name.
+	 * @param string $methodName   Method name.
+	 *
+	 * @throws \Exception   If required parameter is not set.
+	 *
+	 * @return array   Method parameters.
+	 */
+	protected function getMethodParameters($className, $methodName)
+	{
 		$reflectionClass = new \ReflectionClass($className);
 		$reflectionMethod = $reflectionClass->getMethod($methodName);
+
 		$parameters = array();
 		foreach ($reflectionMethod->getParameters() as $reflectionParameter)
 		{
@@ -55,12 +72,7 @@ abstract class ApplicationBoAbstract
 				throw new \Exception('Parameter required: "' . $reflectionParameter->getName() . '"');
 			}
 		}
-		var_dump($parameters);
 
-		$object = new $className();
-		$object($methodName, $parameters);
-		//call_user_func( array( $object, $methodName ) );
-
-		// $object->$methodName();
+		return $parameters;
 	}
 }
