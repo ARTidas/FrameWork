@@ -36,7 +36,7 @@ class DatabaseConnectionBo
 	 */
 	public function getHandler($databaseName)
 	{
-		$databaseDo = ConfigDo::getDatabaseDo($databaseName);
+		$databaseDo = ConfigDo::getInstance()->getDatabaseDo($databaseName);
 
 		return $this->databaseHandlerBoFactory->get($databaseDo);
 	}

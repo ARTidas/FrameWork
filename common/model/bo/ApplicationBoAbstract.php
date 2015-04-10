@@ -59,7 +59,7 @@ abstract class ApplicationBoAbstract
 		$parameters = array();
 		foreach ($reflectionMethod->getParameters() as $reflectionParameter)
 		{
-			if (isset($_POST[$reflectionParameter->getName()]))
+			if (isset($_POST[$reflectionParameter->getName()]) && !empty($_POST[$reflectionParameter->getName()]))
 			{
 				$parameters[$reflectionParameter->getName()] = $_POST[$reflectionParameter->getName()];
 			}

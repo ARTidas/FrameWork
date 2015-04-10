@@ -53,6 +53,13 @@ class DatabaseDo
 	protected $password;
 
 	/**
+	 * Database file.
+	 *
+	 * @var string
+	 */
+	protected $file;
+
+	/**
 	 * Get database name.
 	 *
 	 * @return string   Database name.
@@ -96,6 +103,8 @@ class DatabaseDo
 	public function setType($type)
 	{
 		$this->type = (string)$type;
+
+		return $this;
 	}
 
 	/**
@@ -190,6 +199,30 @@ class DatabaseDo
 	public function setPassword($password)
 	{
 		$this->password = $password;
+
+		return $this;
+	}
+
+	/**
+	 * Get database file.
+	 *
+	 * @return string   Database file.
+	 */
+	public function getFile()
+	{
+		return $this->file;
+	}
+
+	/**
+	 * Set database file.
+	 *
+	 * @param string $file   Database file.
+	 *
+	 * @return $this
+	 */
+	public function setFile($file)
+	{
+		$this->file = (string)$file;
 
 		return $this;
 	}

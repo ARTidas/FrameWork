@@ -32,6 +32,13 @@ class UserDo
 	protected $password;
 
 	/**
+	 * User password salt;
+	 *
+	 * @var string
+	 */
+	protected $passwordSalt;
+
+	/**
 	 * Get nick.
 	 *
 	 * @return string   Nick.
@@ -99,6 +106,30 @@ class UserDo
 	public function setPassword($password)
 	{
 		$this->password = (string)$password;
+
+		return $this;
+	}
+
+	/**
+	 * Get user password salt.
+	 *
+	 * @return string   Password salt.
+	 */
+	public function getPasswordSalt()
+	{
+		return $this->passwordSalt;
+	}
+
+	/**
+	 * Set user password salt.
+	 *
+	 * @param string $passwordSalt   Password salt.
+	 *
+	 * @return $this
+	 */
+	public function setPasswordSalt($passwordSalt)
+	{
+		$this->passwordSalt = (string)$passwordSalt;
 
 		return $this;
 	}

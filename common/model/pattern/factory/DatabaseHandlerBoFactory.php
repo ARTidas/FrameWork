@@ -10,6 +10,13 @@ namespace Common;
  */
 class DatabaseHandlerBoFactory
 {
+	/** Database type: mysql. */
+	const DATABASE_TYPE_MYSQL   = 'mysql';
+	/** Database type: sqlite. */
+	const DATABASE_TYPE_SQLITE  = 'sqlite';
+	/** Database type: mongodb. */
+	const DATABASE_TYPE_MONGODB = 'mongodb';
+
 	/**
 	 * Instantiated handlers.
 	 *
@@ -35,7 +42,8 @@ class DatabaseHandlerBoFactory
 
 		switch ($databaseDo->getType())
 		{
-			case ConfigDo::DATABASE_TYPE_MYSQL:
+			case self::DATABASE_TYPE_SQLITE:
+			case self::DATABASE_TYPE_MYSQL:
 				$this->handlers[$databaseDo->getName()] = new PdoDatabaseHandlerBo($databaseDo);
 				return $this->handlers[$databaseDo->getName()];
 				break;

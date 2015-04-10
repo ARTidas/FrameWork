@@ -2,7 +2,7 @@
 
 namespace Common;
 
-use \Site\RoutingDo as SiteRoutingDo;
+use \Admin\RoutingDo as AdminRoutingDo;
 use \User\RoutingDo as UserRoutingDo;
 
 /**
@@ -30,8 +30,8 @@ class RoutingDoFactory
 				return new RoutingDo();
 				break;
 
-			case strtolower(ConfigDo::APPLICATION_SITE):
-				return new SiteRoutingDo();
+			case strtolower(ConfigDo::APPLICATION_ADMIN):
+				return new AdminRoutingDo();
 				break;
 
 			case strtolower(ConfigDo::APPLICATION_USER):

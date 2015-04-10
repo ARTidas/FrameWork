@@ -1,13 +1,13 @@
 <?php
 
-namespace Site;
+namespace Admin;
 
 use \Common\ApplicationBoAbstract;
 
 /**
- * Site application business object.
+ * Admin application business object.
  *
- * @package    Site
+ * @package    Admin
  * @subpackage Bo
  */
 class ApplicationBo extends ApplicationBoAbstract

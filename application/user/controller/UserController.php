@@ -3,8 +3,9 @@
 namespace User;
 
 use Common\ControllerAbstract;
+use Common\JsonLayout;
+use Common\JsonLayoutDo;
 use Common\JsonView;
-use Common\JsonViewDo;
 
 /**
  * User actions.
@@ -25,39 +26,29 @@ class UserController extends ControllerAbstract
 	 */
 	public function create($nick, $email, $password)
 	{
-		$viewDo = new JsonViewDo();
+        $layoutDo = new JsonLayoutDo();
+		$layoutDo->addHeader(self::HEADER_JSON);
 
-		try
+		$userDo = (new UserDo())
+			->setNick($nick)
+			->setEmail($email)
+			->setPassword($password)
+		;
+		$userBoBuilder = new UserBoBuilder($userDo);
+		$userBo        = $userBoBuilder->build();
+
+		if ($userBo->getUserValidatorBo()->isValid() && $userBo->create())
 		{
-			$userDo          = (new UserDo())
-				->setNick($nick)
-				->setEmail($email)
-				->setPassword($password)
-			;
-			$userDao         = new UserDao();
-			$userBo          = new UserBo($userDo, $userDao);
-			$userValidatorBo = new UserValidatorBo();
-
-			$userCreationErrors = $userValidatorBo->getErrors($userDo);
-
-			if (empty($userCreationErrors))
-			{
-				$userBo->create();
-				$viewDo->setSuccess(true);
-			}
-			else
-			{
-				$viewDo->setSuccess(false);
-				$viewDo->setErrors($userCreationErrors);
-			}
+			$layoutDo->setSuccess(true);
 		}
-		catch (\Exception $exception)
+		else
 		{
-			$viewDo->setSuccess(false);
-			$viewDo->addError($exception->getMessage());
+			$layoutDo->setErrors($userBo->getUserValidatorBo()->getErrors());
 		}
 
-		$view = new JsonView($viewDo);
-		$view->display();
+		$view   = new JsonView();
+		$layout = new JsonLayout($layoutDo, $view);
+
+		$layout->display();
 	}
 }

@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+body {
+    font-family: 'Source Code Pro', Monaco, Consolas, "Lucida Console", monospace;
+    background-color: #eee;
+    color: #005;
+    font-size: 10px;
+}
+
+.logField {
+    width: 15%;
+}
+
+.log {
+    background-color: #eee;
+}
+.newLog {
+    background-color: #fc6;
+}
+.newLog, .log {
+    padding: 3px;
+
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+}

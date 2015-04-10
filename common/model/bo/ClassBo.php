@@ -20,10 +20,22 @@ class ClassBo
 	const TYPE_DAO        = 'Dao';
 	/** Type: View. */
 	const TYPE_VIEW       = 'View';
+	/** Type: Helper. */
+	const TYPE_HELPER     = 'Helper';
+	/** Type: Layout. */
+	const TYPE_LAYOUT     = 'Layout';
 	/** Type: Factory. */
 	const TYPE_FACTORY    = 'Factory';
+	/** Type: Singleton. */
+	const TYPE_SINGLETON  = 'Singleton';
+	/** Type: Builder. */
+	const TYPE_BUILDER    = 'Builder';
 	/** Type: Abstract. */
 	const TYPE_ABSTRACT   = 'Abstract';
+	/** Type: DataStructure - Ds. */
+	const TYPE_DS         = 'Ds';
+	/** Type: Log. */
+	const TYPE_LOG        = 'Log';
 
 	/**
 	 * Valid class types.
@@ -36,8 +48,14 @@ class ClassBo
 		self::TYPE_DO,
 		self::TYPE_DAO,
 		self::TYPE_VIEW,
+		self::TYPE_HELPER,
+		self::TYPE_LAYOUT,
 		self::TYPE_FACTORY,
+		self::TYPE_SINGLETON,
+		self::TYPE_BUILDER,
 		self::TYPE_ABSTRACT,
+		self::TYPE_DS,
+		self::TYPE_LOG,
 	);
 
 	/**
@@ -102,27 +120,47 @@ class ClassBo
 		switch ($classType)
 		{
 			case self::TYPE_CONTROLLER:
-				return ConfigDo::$classFolderController;
+				return ConfigDo::getInstance()->getClassFolderController();
 				break;
 
 			case self::TYPE_BO:
-				return ConfigDo::$classFolderBo;
+				return  ConfigDo::getInstance()->getClassFolderBo();
 				break;
 
 			case self::TYPE_DO:
-				return ConfigDo::$classFolderDo;
+				return  ConfigDo::getInstance()->getClassFolderDo();
+				break;
+
+			case self::TYPE_DS:
+				return  ConfigDo::getInstance()->getClassFolderDs();
 				break;
 
 			case self::TYPE_DAO:
-				return ConfigDo::$classFolderDao;
+				return  ConfigDo::getInstance()->getClassFolderDao();
 				break;
 
 			case self::TYPE_FACTORY:
-				return ConfigDo::$classFolderFactory;
+				return  ConfigDo::getInstance()->getClassFolderFactory();
+				break;
+
+			case self::TYPE_SINGLETON:
+				return  ConfigDo::getInstance()->getClassFolderSingleton();
+				break;
+
+			case self::TYPE_BUILDER:
+				return  ConfigDo::getInstance()->getClassFolderBuilder();
 				break;
 
 			case self::TYPE_VIEW:
-				return ConfigDo::$classFolderView;
+				return  ConfigDo::getInstance()->getClassFolderView();
+				break;
+
+			case self::TYPE_HELPER:
+				return  ConfigDo::getInstance()->getClassFolderHelper();
+				break;
+
+			case self::TYPE_LAYOUT:
+				return  ConfigDo::getInstance()->getClassFolderLayout();
 				break;
 
 			default:

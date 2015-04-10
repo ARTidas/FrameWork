@@ -6,7 +6,7 @@ namespace Common;
  * Common view abstract.
  *
  * @package    Common
- * @subpackage View
+ * @subpackage Layout
  */
 abstract class ViewAbstract
 {
@@ -20,7 +20,7 @@ abstract class ViewAbstract
 	/**
 	 * View data object.
 	 *
-	 * @var string
+	 * @var ViewDoAbstract
 	 */
 	protected $viewDo;
 
@@ -29,7 +29,7 @@ abstract class ViewAbstract
 	 *
 	 * @param ViewDoAbstract $viewDo   View data object.
 	 */
-	public function __construct(ViewDoAbstract $viewDo)
+	public function __construct(ViewDoAbstract $viewDo = null)
 	{
 		$this->viewDo = $viewDo;
 		$this->loadContent();
@@ -43,16 +43,6 @@ abstract class ViewAbstract
 	public function getContent()
 	{
 		return $this->content;
-	}
-
-	/**
-	 * Display template.
-	 *
-	 * @return void
-	 */
-	public function display()
-	{
-		echo $this->content;
 	}
 
 	/**

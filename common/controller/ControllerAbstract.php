@@ -10,6 +10,11 @@ namespace Common;
  */
 abstract class ControllerAbstract
 {
+	/** Header: JSON content type. */
+	const HEADER_JSON = 'Content-Type: application/json';
+	/** Header: HTML content type. */
+	const HEADER_HTML = 'Content-Type: text/html; charset=utf-8';
+
 	/**
 	 * Invoke.
 	 *
@@ -21,23 +26,5 @@ abstract class ControllerAbstract
 	public function __invoke($methodName, array $methodParameters = array())
 	{
 		call_user_func_array([$this, $methodName], $methodParameters);
-	}
-
-	/**
-	 * Display documentation.
-	 *
-	 * @return string
-	 */
-	public function displayDocumentation()
-	{
-		$layoutDo = new LayoutViewDo();
-		$layoutDo
-			->setCss('common.css')
-			->setTitle('FrameWork')
-			->setHeader1('FrameWork Documentation');
-		;
-		$view     = new LayoutView($layoutDo);
-
-		$view->display();
 	}
 }

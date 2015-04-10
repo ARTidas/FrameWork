@@ -152,4 +152,24 @@ class RoutingDoAbstract
 	{
 		return $this->routing;
 	}
+
+	/**
+	 * Get url by route identifier.
+	 *
+	 * @param string $route       Route identifier.
+	 * @param string $namespace   Namespace of the routing data object class.
+	 *
+	 * @throws \Exception   If invalid route identifier encountered.
+	 *
+	 * @return string   Url string.
+	 */
+	public function getUrl($route, $namespace)
+	{
+		if (!isset($this->routing[$route]))
+		{
+			throw new \Exception('Invalid route identifier encountered: "' . $route . '"');
+		}
+
+		return ConfigDo::getInstance()->getRootUrl() . '/' . strtolower($namespace) . '/' . $route;
+	}
 }

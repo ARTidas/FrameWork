@@ -11,98 +11,148 @@ namespace User;
 class UserValidatorBo
 {
 	/**
-	 * Validate user attributes.
+	 * User data object.
 	 *
-	 * @param UserDo $userDo   User data object.
-	 *
-	 * @return boolean   True on success, false otherwise.
+	 * @var UserDo
 	 */
-	public function isValid(UserDo $userDo)
-	{
-		$errors = $this->getErrors($userDo);
+	protected $userDo;
 
-		return empty($errors);
+	/**
+	 * User data access object.
+	 *
+	 * @var UserDao
+	 */
+	protected $userDao;
+
+	/**
+	 * User nick name errors.
+	 *
+	 * @var array
+	 */
+	protected $errorsNick = array();
+
+	/**
+	 * User e-mail address errors.
+	 *
+	 * @var array
+	 */
+	protected $errorsEmail = array();
+
+	/**
+	 * User password errors.
+	 *
+	 * @var array
+	 */
+	protected $errorsPassword = array();
+
+	/**
+	 * Construct.
+	 *
+	 * @param UserDo  $userDo    User data object.
+	 * @param UserDao $userDao   User data access object.
+	 */
+	public function __construct(UserDo $userDo, UserDao $userDao)
+	{
+		$this->userDo  = $userDo;
+		$this->userDao = $userDao;
+
+		$this->loadErrors();
 	}
 
 	/**
-	 * Get validation errors.
+	 * Determine if user attributes are valid.
 	 *
-	 * @param UserDo $userDo   User data object.
-	 *
-	 * @return array   Validation errors.
+	 * @return boolean   True on valid, false otherwise.
 	 */
-	public function getErrors(UserDo $userDo)
+	public function isValid()
+	{
+		return empty($this->errorsNick) && empty($this->errorsEmail) && empty($this->errorsPassword);
+	}
+
+	/**
+	 * Get user attribute errors.
+	 *
+	 * @return array
+	 */
+	public function getErrors()
 	{
 		return array_merge(
-			$this->getUserNickErrors($userDo->getNick()),
-			$this->getUserEmailErrors($userDo->getEmail()),
-			$this->getUserPasswordErrors($userDo->getPassword())
+			$this->errorsNick,
+			$this->errorsEmail,
+			$this->errorsPassword
 		);
 	}
 
 	/**
-	 * Get user nick name errors.
+	 * Load validation errors.
 	 *
-	 * @param string $userNick   User nick.
-	 *
-	 * @return array   Errors on user nick name.
+	 * @return void
 	 */
-	public function getUserNickErrors($userNick)
+	protected function loadErrors()
 	{
-		$errors = array();
+		$this->loadUserNickErrors();
+		$this->loadUserEmailErrors();
+		$this->loadUserPasswordErrors();
+	}
+
+	/**
+	 * Load user nick name errors.
+	 *
+	 * @return void
+	 */
+	protected function loadUserNickErrors()
+	{
+		$userNick = $this->userDo->getNick();
 
 		if (empty($userNick))
 		{
-			$errors[] = 'User nick name can not be empty!';
+			$this->errorsNick[] = 'User nick name can not be empty!';
 		}
-
-		if (preg_match('/[^A-Za-z0-9]/', $userNick) !== 1)
+		if (preg_match('/[^A-Za-z0-9]/', $userNick) === 1)
 		{
-			$errors[] = 'User nick can contain only alphanumerical characters!';
+			$this->errorsNick[] = 'User nick name can contain only alphanumerical characters!';
+		}
+		if ($this->userDao->getByNick($userNick))
+		{
+			$this->errorsNick[] = 'User nick ("' . $userNick . '") already exists!';
 		}
 
-		return $errors;
+		// TODO: Check for unique nick name. [ARTidas]
 	}
 
 	/**
-	 * Get user e-mail address errors.
+	 * Load user e-mail address errors.
 	 *
-	 * @param string $userEmail   User e-mail address.
-	 *
-	 * @return array   Errors on user e-mail address.
+	 * @return void
 	 */
-	public function getUserEmailErrors($userEmail)
+	protected function loadUserEmailErrors()
 	{
-		$errors = array();
+		$userEmail = $this->userDo->getEmail();
 
 		if (empty($userEmail))
 		{
-			$errors[] = 'User e-mail address can not be empty!';
+			$this->errorsEmail[] = 'User e-mail address can not be empty!';
 		}
-		if (filter_var($userEmail, FILTER_VALIDATE_EMAIL))
+		if (!filter_var($userEmail, FILTER_VALIDATE_EMAIL))
 		{
-			$errors[] = 'User e-mail address is not valid: "' . $userEmail . '"';
+			$this->errorsEmail[] = 'User e-mail address is not valid: "' . $userEmail . '"';
 		}
 
-		return $errors;
+		// TODO: Check for unique e-mail address. [ARTidas]
 	}
 
 	/**
-	 * Get user password errors.
+	 * Load user password errors.
 	 *
-	 * @param string $userPassword   User password.
-	 *
-	 * @return array   Errors on user password.
+	 * @return void
 	 */
-	public function getUserPasswordErrors($userPassword)
+	protected function loadUserPasswordErrors()
 	{
-		$errors = array();
+		$userPassword = $this->userDo->getPassword();
 
 		if (empty($userPassword))
 		{
 			$errors[] = 'User password can not be empty!';
 		}
-
-		return $errors;
 	}
 }

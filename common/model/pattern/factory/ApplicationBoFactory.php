@@ -2,7 +2,7 @@
 
 namespace Common;
 
-use \Site\ApplicationBo as SiteApplicationBo;
+use \Admin\ApplicationBo as AdminApplicationBo;
 use \User\ApplicationBo as UserApplicationBo;
 
 /**
@@ -49,8 +49,8 @@ class ApplicationBoFactory
 				);
 				break;
 
-			case strtolower(ConfigDo::APPLICATION_SITE):
-				return new SiteApplicationBo(
+			case strtolower(ConfigDo::APPLICATION_ADMIN):
+				return new AdminApplicationBo(
 					$this->routingDo
 				);
 				break;

@@ -21,11 +21,11 @@ class ApplicationFolderBo
 	{
 		if (strtolower($applicationName) === strtolower(ConfigDo::APPLICATION_COMMON))
 		{
-			return '/' . ConfigDo::$commonFolder;
+			return '/' . ConfigDo::getInstance()->getCommonFolder();
 		}
 		else
 		{
-			return '/' . ConfigDo::$applicationFolder . '/' . strtolower($applicationName);
+			return '/' . ConfigDo::getInstance()->getApplicationFolder() . '/' . strtolower($applicationName);
 		}
 	}
 }

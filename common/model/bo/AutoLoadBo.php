@@ -39,9 +39,9 @@ class AutoLoadBo
 	/**
 	 * Load a class by name.
 	 *
-	 * @throws \Exception   If invalid namespace encountered.
-	 *
 	 * @param string $className   Class name to load.
+	 *
+	 * @throws \Exception   If invalid namespace encountered.
 	 *
 	 * @return void
 	 */
@@ -50,6 +50,12 @@ class AutoLoadBo
 		$classAttributes = explode('\\', $className);
 		$classNamespace  = $classAttributes[0];
 		$className       = $classAttributes[1];
+
+		if (empty($classNamespace) || empty($className))
+		{
+			throw new \Exception('Invalid class naming encountered: "' . var_export($classAttributes, true) . '"');
+		}
+
 		$classType       = $this->classBo->getType($className);
 		$classRoute      = $this->applicationFolderBo->get($classNamespace)
 			. '/'
